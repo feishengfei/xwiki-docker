@@ -29,7 +29,7 @@ services:
     depends_on:
       - db
     ports:
-      - "8080:8080"
+      - "8083:8080"
     # Default values defined in .env file.
     # The DB_USER/DB_PASSWORD/DB_DATABASE/DB_HOST variables are used in the hibernate.cfg.xml file.
     environment:
@@ -44,6 +44,7 @@ services:
       - xwiki-data:/usr/local/xwiki
     networks:
       - bridge
+    restart: unless-stopped
   # The container that runs the database (mysql)
   db:
     image: "mysql:5.7"
@@ -68,6 +69,7 @@ services:
       - MYSQL_DATABASE=${DB_DATABASE}
     networks:
       - bridge
+    restart: unless-stopped
 volumes:
   mysql-data: {}
   xwiki-data: {}
